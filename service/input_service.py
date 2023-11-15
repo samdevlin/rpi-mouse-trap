@@ -9,12 +9,12 @@ handlers = []
 
 def listen():
     # wait_for_active function could be used to control the event loop
-    return 0
+    raise NotImplementedError
 
 def execute_handlers():
-    return 0
+    raise NotImplementedError
 
 def register_handler():
-    return 0
+    raise NotImplementedError
 
 switch.when_activated = execute_handlers
