@@ -1,5 +1,7 @@
 import unittest
-from service.email_service import add_recipient, notify, _isValidEmail
+from unittest.mock import patch
+
+from service.email_service import add_recipient, notify, _isValidEmail, _sendEmails
 from util.error.InvalidEmailError import InvalidEmailError
 from util.error.NoRecipientsError import NoRecipientsError
 
@@ -14,6 +16,14 @@ class TestSuccessCases(unittest.TestCase):
 
     def test_valid_email(self):
         self.assertNotEqual(_isValidEmail(VALID_EMAIL), None)
+    @patch('service.email_service._sendEmail')
+    def test_email_sent(self, send_email_mock):
+        send_email_mock.return_value = True
+        add_recipient(VALID_EMAIL)
+        result = notify()
+
+        self.assertEqual(send_email_mock.call_count, 1)
+        self.assertEqual(result, { VALID_EMAIL : True })
 
 class TestFailureCases(unittest.TestCase):
     def test_invalid_recipient(self):
