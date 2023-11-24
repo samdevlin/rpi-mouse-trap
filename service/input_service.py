@@ -1,20 +1,30 @@
 from gpiozero import Button
 
-#=== GPIO config ===#
+# === GPIO config ===#
 # if we need to change the input type/where it's soldered, we can do that here.
-switch = Button(2)
+# TODO - uncomment when connected to PI
+# switch = Button(2)
+switch = None
 
-# an array of functions to call when a press is detected
-handlers = []
+# a set of functions to call when a press is detected
+handlers = set()
+
 
 def listen():
     # wait_for_active function could be used to control the event loop
     raise NotImplementedError
 
+
 def execute_handlers():
     raise NotImplementedError
 
-def register_handler():
-    raise NotImplementedError
 
-switch.when_activated = execute_handlers
+def register_handler(handler):
+    if not callable(handler):
+        raise TypeError('Handler must be a function - please pass a function instead.')
+
+    handlers.add(handler)
+    return handlers
+
+# TODO - uncomment when connected to PI
+# switch.when_activated = execute_handlers
