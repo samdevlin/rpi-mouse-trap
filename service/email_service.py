@@ -12,7 +12,7 @@ SENDER_APP_KEY = os.environ['app_key']
 
 
 def add_recipient(email_addr):
-    if _isValidEmail(email_addr) is None:
+    if _is_valid_email(email_addr) is None:
         raise InvalidEmailError("Could not validate the recipient's email address")
 
     recipient_list.append(email_addr)
@@ -23,14 +23,14 @@ def notify():
     if not recipient_list:
         raise NoRecipientsError("No email recipients found. Could not notify via email.")
 
-    _sendEmails()
+    _send_emails()
 
 
-def _isValidEmail(email):
+def _is_valid_email(email):
     return re.fullmatch(EMAIL_REGEX, email)
 
 
-def _sendEmails():
+def _send_emails():
     # Message Configuration
     msg = MIMEText("Here there's a mouse in the attic ye")
     msg["Subject"] = "You've got mouse"
