@@ -16,7 +16,8 @@ def listen():
 
 
 def execute_handlers():
-    raise NotImplementedError
+    for handler in handlers:
+        handler()
 
 
 def register_handler(handler):
