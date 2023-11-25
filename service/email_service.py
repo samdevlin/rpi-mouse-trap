@@ -1,4 +1,4 @@
-import re, smtplib
+import re, smtplib, os
 from email.mime.text import MIMEText
 from util.error.InvalidEmailError import InvalidEmailError
 from util.error.NoRecipientsError import NoRecipientsError
@@ -7,9 +7,8 @@ EMAIL_REGEX = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
 recipient_list = []
 
 # === GMAIL ACCOUNT DETAILS ===#
-# TODO: move this to a config file
-SENDER_USERNAME = 'ratsout.notification'
-SENDER_APP_KEY = ''
+SENDER_USERNAME = os.environ['username']
+SENDER_APP_KEY = os.environ['app_key']
 
 
 def add_recipient(email_addr):
