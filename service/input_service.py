@@ -2,17 +2,18 @@ from gpiozero import Button
 
 # === GPIO config ===#
 # if we need to change the input type/where it's soldered, we can do that here.
-# TODO - uncomment when connected to PI
-# switch = Button(2)
-switch = None
+button = Button(2)
 
 # a set of functions to call when a press is detected
 handlers = set()
 
 
 def listen():
-    # wait_for_active function could be used to control the event loop
-    raise NotImplementedError
+    print('Listening..')
+    while True:
+        button.wait_for_active()
+        print('Button was pressed! Executing handlers..')
+        execute_handlers()
 
 
 def execute_handlers():
@@ -26,6 +27,3 @@ def register_handler(handler):
 
     handlers.add(handler)
     return handlers
-
-# TODO - uncomment when connected to PI
-# switch.when_activated = execute_handlers
