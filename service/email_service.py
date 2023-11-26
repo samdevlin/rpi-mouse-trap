@@ -1,14 +1,14 @@
 import re, smtplib, os
 from email.mime.text import MIMEText
-from util.error.InvalidEmailError import InvalidEmailError
-from util.error.NoRecipientsError import NoRecipientsError
+
+from errors import InvalidEmailError, NoRecipientsError
 
 EMAIL_REGEX = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
 recipient_list = []
 
 # === GMAIL ACCOUNT DETAILS ===#
-SENDER_USERNAME = os.environ['username']
-SENDER_APP_KEY = os.environ['app_key']
+SENDER_USERNAME = os.getenv('username')
+SENDER_APP_KEY = os.getenv('app_key')
 
 
 def add_recipient(email_addr):

@@ -1,5 +1,5 @@
 import configparser, os
-from util.error.MissingConfigurationError import MissingConfigurationError
+from errors import MissingConfigurationError
 
 
 def load_section_to_env(section_name):

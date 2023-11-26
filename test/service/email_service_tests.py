@@ -1,9 +1,8 @@
-import unittest
+import unittest, os
 from unittest.mock import patch
 
 from service.email_service import add_recipient, notify, _is_valid_email
-from util.error.InvalidEmailError import InvalidEmailError
-from util.error.NoRecipientsError import NoRecipientsError
+from errors import InvalidEmailError, NoRecipientsError
 
 VALID_EMAIL = "samplemail@mail.com"
 INVALID_EMAIL = "some string"

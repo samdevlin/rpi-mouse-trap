@@ -1,5 +1,5 @@
 import unittest, os
-from util.config.config_loader import load_section_to_env
+from util.config_loader import load_section_to_env
 
 
 class TestSuccessCases(unittest.TestCase):

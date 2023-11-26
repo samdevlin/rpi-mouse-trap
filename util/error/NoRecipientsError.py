@@ -1,2 +1,0 @@
-class NoRecipientsError(Exception):
-    pass
