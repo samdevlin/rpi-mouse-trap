@@ -42,7 +42,8 @@ def _send_emails():
     try:
         smtp_server.login(SENDER_USERNAME, SENDER_APP_KEY)
         smtp_server.send_message(msg)
-    # TODO: catch timeout
+    except TimeoutError as err:
+        print(f"Email request timed out. See error below: \n {err}")
     except Exception as err:
         print(f"An unexpected error of type {type(err)} occurred: {err}")
     finally:
