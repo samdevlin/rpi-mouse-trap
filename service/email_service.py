@@ -6,11 +6,6 @@ from errors import InvalidEmailError, NoRecipientsError
 EMAIL_REGEX = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
 recipient_list = []
 
-# === GMAIL ACCOUNT DETAILS ===#
-SENDER_USERNAME = os.getenv('username')
-SENDER_APP_KEY = os.getenv('app_key')
-
-
 def add_recipient(email_addr):
     if _is_valid_email(email_addr) is None:
         raise InvalidEmailError("Could not validate the recipient's email address")
@@ -31,6 +26,10 @@ def _is_valid_email(email):
 
 
 def _send_emails():
+    # Retrieve email config
+    SENDER_USERNAME = os.getenv('username')
+    SENDER_APP_KEY = os.getenv('app_key')
+
     # Message Configuration
     msg = MIMEText("Here there's a mouse in the attic ye")
     msg["Subject"] = "You've got mouse"
@@ -41,7 +40,9 @@ def _send_emails():
     smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     try:
         smtp_server.login(SENDER_USERNAME, SENDER_APP_KEY)
+        print('login successful')
         smtp_server.send_message(msg)
+        print('Email sent successfully!')
     except TimeoutError as err:
         print(f"Email request timed out. See error below: \n {err}")
     except Exception as err:

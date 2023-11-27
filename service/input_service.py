@@ -2,7 +2,7 @@ from gpiozero import Button
 
 # === GPIO config ===#
 # if we need to change the input type/where it's soldered, we can do that here.
-button = Button(2)
+button = Button(18)
 
 # a set of functions to call when a press is detected
 handlers = set()
