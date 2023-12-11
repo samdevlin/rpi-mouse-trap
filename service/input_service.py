@@ -12,11 +12,10 @@ def listen():
     print('Listening..')
     while True:
         button.wait_for_active()
-        print('Button was pressed! Executing handlers..')
-        execute_handlers()
 
 
 def execute_handlers():
+    print('Button was pressed! Executing handlers..')
     for handler in handlers:
         handler()
 
@@ -27,3 +26,6 @@ def register_handler(handler):
 
     handlers.add(handler)
     return handlers
+
+
+button.when_pressed = execute_handlers
